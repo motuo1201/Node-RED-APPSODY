@@ -1,0 +1,48 @@
+apiVersion: appsody.dev/v1beta1
+kind: AppsodyApplication
+metadata:
+  annotations:
+    image.opencontainers.org/created: "2019-12-12T14:57:18+09:00"
+    stack.appsody.dev/authors: Nick O'Leary <nick.oleary@gmail.com>
+    stack.appsody.dev/configured: docker.io/appsody/node-red:0.1
+    stack.appsody.dev/created: "2019-12-11T15:04:54Z"
+    stack.appsody.dev/description: Node-RED runtime for running flows
+    stack.appsody.dev/licenses: Apache-2.0
+    stack.appsody.dev/tag: appsody/node-red:0.1.0
+    stack.appsody.dev/title: Node-RED
+  creationTimestamp: null
+  labels:
+    image.opencontainers.org/title: my-nodered-project
+    stack.appsody.dev/id: node-red
+    stack.appsody.dev/version: 0.1.0
+  name: my-nodered-project
+spec:
+  applicationImage: dev.local/my-nodered-project
+  createKnativeService: false
+  expose: true
+  livenessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /live
+      port: 3000
+    initialDelaySeconds: 5
+    periodSeconds: 2
+  monitoring:
+    labels:
+      k8s-app: my-nodered-project
+  readinessProbe:
+    failureThreshold: 12
+    httpGet:
+      path: /ready
+      port: 3000
+    initialDelaySeconds: 5
+    periodSeconds: 2
+    timeoutSeconds: 1
+  service:
+    annotations:
+      prometheus.io/scrape: "true"
+    port: 3000
+    type: NodePort
+  stack: node-red
+  version: 1.0.0
+status: {}
