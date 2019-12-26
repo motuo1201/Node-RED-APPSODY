@@ -8,5 +8,9 @@
             "flowFile": "flow.json",
             "credentialsFile": "flow_cred.json"
         }
+    },
+    "repository": {
+      "type": "git",
+      "url": "https://github.com/motuo1201/Node-RED-APPSODY"
     }
 }
